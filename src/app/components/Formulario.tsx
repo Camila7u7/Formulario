@@ -1,6 +1,20 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import { useFetchAditionalPlan } from "../../hooks/useFetchAditionalPlan";
+import { useFetchBranch } from "../../hooks/useFetchBranch";
+import { useFetchTypeDocuments } from "../../hooks/useFetchTypeDocuments";
+import { useFetchTypePlans } from "../../hooks/useFetchTypePlans";
+import { Document, Documentos } from "../interfaces/data";
 
 export const Formulario = () => {
+
+  const { dataDocumentos } = useFetchTypeDocuments()
+  
+  const { dataBranch } = useFetchBranch()
+
+  const { dataTypePlans } = useFetchTypePlans()
+
+  const { dataAditional } = useFetchAditionalPlan()
+  
   return (
     <div>
       <div className="card">
@@ -16,11 +30,14 @@ export const Formulario = () => {
                   className="form-select"
                   aria-label="Default select example"
                   required
+                  defaultValue={0}
                 >
-                  <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option value="0" disabled>Seleccione</option>
+                  {
+                    dataDocumentos && dataDocumentos.map((tipoDocumento:Document, index) => 
+                    <option key={"documento"+index} value={tipoDocumento.DATO}>{tipoDocumento.TEXTO}</option>  
+                    )
+                  }
                 </select>
               </div>
             </div>
@@ -50,7 +67,7 @@ export const Formulario = () => {
             </div>
             <div className="row mb-3">
               <label htmlFor="inputNumber" className="col-sm-2 col-form-label">
-                Numero
+                Numero Telefono
               </label>
               <div className="col-sm-10">
                 <input type="text" className="form-control" required />
@@ -71,11 +88,14 @@ export const Formulario = () => {
                   className="form-select"
                   aria-label="Default select example"
                   required
+                  defaultValue={0}
                 >
-                  <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option value="0" disabled>Seleccione</option>
+                  {
+                    dataBranch && dataBranch.map((branch, index) => 
+                    <option key={"marca"+index} value={branch.COD_MARCA}>{branch.TXT_DESC}</option>  
+                    )
+                  }
                 </select>
               </div>
             </div>
@@ -86,11 +106,9 @@ export const Formulario = () => {
                   className="form-select"
                   aria-label="Default select example"
                   required
+                  defaultValue={0}
                 >
-                  <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option value="0" disabled>Seleccione</option>
                 </select>
               </div>
             </div>
@@ -120,24 +138,56 @@ export const Formulario = () => {
               </div>
             </div>
             <div className="row mb-3">
-              <label htmlFor="inputNumber" className="col-sm-2 col-form-label">
-                Plan de Cobertura
-              </label>
+              <label className="col-sm-2 col-form-label">Tipo de Planes</label>
               <div className="col-sm-10">
-                <input type="number" min="1" className="form-control" />
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                  required
+                  defaultValue={0}
+                >
+                  <option value="0" disabled>Seleccione</option>
+                  {
+                    dataTypePlans && dataTypePlans.map((Plan, index) => 
+                    <option key={"tipo-plan"+index} value={Plan.DATO}>{Plan.TEXTO}</option>  
+                    )
+                  }
+                </select>
               </div>
             </div>
             <div className="row mb-3">
-              <label htmlFor="inputNumber" className="col-sm-2 col-form-label">
-                Plan de Cobertura Adicional
-              </label>
+              <label className="col-sm-2 col-form-label">Plan de cobertura</label>
               <div className="col-sm-10">
-                <input
-                  type="number"
-                  min="1"
-                  className="form-control"
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
                   required
-                />
+                  defaultValue={0}
+                >
+                  <option value="0" disabled>Seleccione</option>
+                  {
+                    dataBranch && dataBranch.map((branch, index) => 
+                    <option value={branch.COD_MARCA}>{branch.TXT_DESC}</option>  
+                    )
+                  }
+                </select>
+              </div>
+            </div>
+            <div className="row mb-3">
+              <label className="col-sm-2 col-form-label">Plan de Cobertura Adicional</label>
+              <div className="col-sm-10">
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                  required
+                  defaultValue={0}
+                >
+                  {
+                    dataAditional && dataAditional.map((plan, index) => 
+                    <option key={"adicional"+index} value={plan.DATO}>{plan.TEXTO}</option>  
+                    )
+                  }
+                </select>
               </div>
             </div>
 

@@ -24,16 +24,6 @@ export const Header = () => {
                   Inicio
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/Parking">
-                  Parqueadero
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/Session">
-                  Iniciar sesion
-                </Link>
-              </li>
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
@@ -42,7 +32,7 @@ export const Header = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Dropdown link
+                  Cotizadores
                 </a>
                 <ul className="dropdown-menu">
                   <li>
@@ -69,7 +59,6 @@ export const Header = () => {
                 </ul>
               </li>
             </ul>
-            <span className="navbar-text">Iniciar Sesión</span>
           </div>
         </div>
       </nav>
